@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First Flask</title>
+</head>
+<body>
+    <h2>This is my first Flask application</h2>
+    <h3>All My Friends</h1>
+    {% for one_friend in all_friends %}
+        <p>First Name: {{one_friend.first_name}}</p>
+        <p>Last Name: {{one_friend.last_name}}</p>
+        <p>Occupation: {{one_friend.occupation}}</p>
+        <hr>
+    {% endfor %}
+    
+</body>
+</html>

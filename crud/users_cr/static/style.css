@@ -1,0 +1,58 @@
+* {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.container,
+.mainForm {
+    background-color: antiquewhite;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    height: 100vh;
+}
+
+.mainForm,
+.submit,
+h2 {
+    margin-top: 20px;
+}
+
+.mainForm {
+    margin-left: 100px;
+    width: 250px
+}
+
+.submit {
+    background-color: aquamarine;
+}
+
+th,
+td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+    background-color: lightgray;
+}
+
+a {
+    margin-top: 50px;
+    margin-left: 50px;
+    width: 150px;
+    background-color: whitesmoke;
+    color: red;
+    border-radius: 20px;
+    box-shadow: 3px 3px 3px;
+    cursor: pointer;
+}
+
+a:hover {
+    background-color: red;
+    color: whitesmoke;
+}
