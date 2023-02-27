@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css') }}">
+    <!-- this link will redirect to /users in 5 seconds -->
+    <meta http-equiv="Refresh" content="5; URL=http://127.0.0.1:5000/users" />
+    
+</head>
+<body>
+    <div class="container">
+        <h2>You landed on a <span style="color:red">wrong page</span> </h2>
+        <h2>you will be redirected in 5 seconds to:</h2>
+        <br>
+        <h2 style="background-color: aqua;">localhost:5000/users</h2>
+        <br>
+        <h2>Good Luck!</h2>
+        <br>
+        <a href="/users">Don't wait, Go now!</a>
+    </div>
+</body>
+</html>
