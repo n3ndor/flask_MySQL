@@ -14,6 +14,8 @@
         <h2>Created at: {{user.created_at}} </h2>
         <h2>Last Updated: {{user.updated_at}} </h2>
     </div>
+    <a href="/users/edit/{{ user.id }}">Edit</a>
+    <a href="/users/delete/{{ user.id }}">Delete</a>
     
 </body>
 </html>
