@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show profile</title>
+</head>
+<body>
+    <h2>Your Profile Page:</h2>
+    <div style="border: solid 1px; width: 50%; padding-left: 20px;">
+        <h2>Name: {{user.first_name}} {{user.last_name}} </h2>
+        <h2>Email: {{user.email}} </h2>
+        <h2>Created at: {{user.created_at}} </h2>
+        <h2>Last Updated: {{user.updated_at}} </h2>
+    </div>
+    <a href="/users/edit/{{ user.id }}">Edit</a>
+    <a href="/users/delete/{{ user.id }}">Delete</a>
+    
+</body>
+</html>
