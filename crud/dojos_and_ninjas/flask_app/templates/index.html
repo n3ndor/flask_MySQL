@@ -9,5 +9,22 @@
 </head>
 <body>
     <h2>index.html</h2>
+
+    <form action="/create/dojos" method="POST">
+        <h2>New Dojo</h2>
+        <label for="name">Name:</label>
+        <input type="text" name="name">
+
+        <input type="submit" value="Add new Dojo">
+    </form>
+    <h2>All Dojos:</h2>
+    {% for i in all_dojos %}
+    <p>
+        <a href="/dojo/{{i.id}}">{{ i.name }}</a>
+    </p>
+    {% endfor %}
+
+    <a href="/ninjas">Add Ninja</a>
+
 </body>
 </html>

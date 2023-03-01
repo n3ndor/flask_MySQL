@@ -9,5 +9,25 @@
 </head>
 <body>
     <h2>ninja html</h2>
+    <form action="/create/ninja" method="post">
+        <label for="dojo">Dojo name:</label>
+        <select name="dojo_id">
+            {% for i in dojos %}
+            <option value="{{i.id}}">{{i.name}}</option>
+            {% endfor %}
+        </select>
+
+        <label for="first_name">First Name:</label>
+        <input type="text" name="first_name">
+
+        <label for="last_name">Last Name:</label>
+        <input type="text" name="last_name">
+
+        <label for="age">Age:</label>
+        <input type="number" name="age">
+
+        <input type="submit" value="Add new Ninja">
+    </form>
+    <a href="/">Go Back</a>
 </body>
 </html>
