@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css') }}">
+    <title>Edit Ninja</title>
+</head>
+<body>
+    <div class="navbar">
+        <h1>Dojos all Over the World</h1>
+        <a href="/dojos">Menu</a>
+    </div>
+    
+    <div class="container">
+        
+        <form class="mainForm" action="/update/ninja/{{ninja_update.id}}" method="POST">
+            <h2>Edit your user profile:</h2>
+            <br> 
+            <input type="hidden" name="id" value="{{ninja_update.id}}">
+            <input type="hidden" name="dojo_id" value="{{ninja_update.dojo_id}}">
+            
+            <label for="first_name">First Name:</label>
+            <input type="text" name="first_name" value="{{ninja_update.first_name}}">
+            <label for="last_name">Last Name:</label>
+            <input type="text" name="last_name" value="{{ninja_update.last_name}}">
+            <label for="age">Age:</label>
+            <input type="number" name="age" value="{{ninja_update.age}}">
+            
+            <input class="submit" type="submit" value="Update now">
+            <a href="/dojos">Go back</a>
+        </form>
+        
+    </div>
+</body>
+</html>

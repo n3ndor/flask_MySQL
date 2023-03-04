@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Dojo</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="navbar">
+        <h1>Dojos all Over the World</h1>
+        <a href="/dojos">Menu</a>
+    </div>
+    
+    <div class="container">
+        
+        <form class="mainForm" action="/update/{{dojo_edit.id}}" method="POST">
+            <h2>Edit your user profile:</h2>
+            <br> 
+            <input type="hidden" name="id" value="{{dojo_edit.id}}">
+            <label for="name">Change Name:</label>
+            <input type="text" name="name" value="{{dojo_edit.name}}">
+            
+            <input class="submit" type="submit" value="Update now">
+            <a href="/dojos">Go back</a>
+        </form>
+        
+    </div>
+</body>
+</html>

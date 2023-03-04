@@ -1,7 +1,44 @@
-* {
-    margin: 0;
-    padding: 0;
+body {
     background-color: blanchedalmond;
-    /* just to test */
+    margin: auto;
+    padding: auto;
+}
 
+h2 {
+    color: blue;
+    font-size: xx-large;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    background-color: burlywood;
+}
+
+.container {
+    gap: 50px;
+    display: flex;
+    justify-content: space-between;
+
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+
+.box {
+    background-color: grey;
+    padding: 20px;
+    border-radius: 40px;
+    box-shadow: 3px 5px 5px 3px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+td {
+    padding-left: 20px;
 }

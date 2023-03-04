@@ -5,26 +5,48 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{url_for('static', filename='style.css') }}">
-    <title>Dojos and Ninjas</title>
+    <title>Dojo Show</title>
 </head>
 <body>
-    <h2>index.html</h2>
+    <div class="navbar">
+        <h1>Dojos all Over the World</h1>
+        <a href="/dojos">Menu</a>
+        
+    </div>
+    <div class="container">
+        <div class="box">
+            <form action="/create/dojo" method="POST">
+                <h2>New Dojo:</h2>
+                <label for="name">Name:</label>
+                <input type="text" name="name">
 
-    <form action="/create/dojos" method="POST">
-        <h2>New Dojo</h2>
-        <label for="name">Name:</label>
-        <input type="text" name="name">
-
-        <input type="submit" value="Add new Dojo">
-    </form>
-    <h2>All Dojos:</h2>
-    {% for i in all_dojos %}
-    <p>
-        <a href="/dojo/{{i.id}}">{{ i.name }}</a>
-    </p>
-    {% endfor %}
-
-    <a href="/ninjas">Add Ninja</a>
-
+                <input type="submit" value="Add new Dojo">
+            </form>
+            <h2>New Ninja:</h2>
+            <a href="/ninja/new">Add new Ninja</a>
+        </div>
+        <div class="box">
+            <h2>Dojos names</h2>
+            
+            <table>
+                <thead>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Edit</th>
+                    <th>Delete (if empty)</th>
+                </thead>
+                <tbody>
+                    {% for i in dojos_all %}
+                    <tr>
+                        <td>{{ i.id }}</td>
+                        <td><a href="/dojo/{{i.id}}">{{ i.name }}</a></td>
+                        <td><a href="/edit/dojo/{{i.id}}">Update</a></td>
+                        <td><a href="/delete/dojo/{{i.id}}">Delete</a></td>
+                        {% endfor %}
+                    </tr>
+                </tbody>
+            </table>
+        </div>        
+    </div>
 </body>
 </html>

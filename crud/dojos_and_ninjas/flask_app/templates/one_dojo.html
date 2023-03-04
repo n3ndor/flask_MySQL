@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css') }}">
+    <title>Dojo</title>
+</head>
+<body>
+    <div class="navbar">
+        <h1>Dojos all Over the World</h1>
+        <a href="/dojos">Menu</a>
+    </div>
+    <div class="container">
+        <div class="box">
+            <p>You are here: {{dojo_one.name}}</p>
+            <table>
+                <thead>
+                    <th>ID</th>
+                    <th>First</th>
+                    <th>Last</th>
+                    <th>Age</th>
+                    <th>Action</th>
+                </thead>
+                {% for i in ninjas_all %}
+                <tbody>
+                    <td>{{i.id}}</td>
+                    <td>{{i.first_name}}</td>
+                    <td>{{i.last_name}}</td>
+                    <td>{{i.age}}</td>
+                    <td>
+                        <a href="/edit/ninja/{{i.id}}">Edit</a>
+                        <span> / </span>
+                        <a href="/delete/ninja/{{i.id}}">Delete</a>
+                    </td>
+                    
+                </tbody>
+                {% endfor %}
+            </table>
+            
+            <a href="/">Get Back</a>
+            
+        </div>        
+    </div>
+</body>
+</html>
