@@ -21,3 +21,8 @@ def update_book():
 @app.route("/book")
 def book():
     return render_template("book_show.html")
+
+@app.route("/book/<int:book_id>")
+def show_book(book_id):
+    one_book = Book.get_book(book_id)
+    return render_template("book_show.html", book_one = one_book)

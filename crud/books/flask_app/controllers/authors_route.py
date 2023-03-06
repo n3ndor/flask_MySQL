@@ -26,3 +26,8 @@ def update_author():
 def author():
     return render_template("author_show.html")
 
+@app.route("/author/<int:author_id>")
+def show_author(author_id):
+    one_author = Author.get_author(author_id)
+    return render_template("author_show.html", author_one = one_author)
+
