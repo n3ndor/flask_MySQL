@@ -18,22 +18,22 @@
         <div class="w-80 d-flex justify-content-center m-5 gap-5">
             <div class="w-30 shadow-lg bg-secondary rounded-5 p-5">
                 <h2 class="text-light">New Books</h2>
-                <form>
+                <form action="/add/book" method="POST">
                     <div class="form-group row p-1">
-                        <label for="title" class="col-sm-2 col-form-label">Title:</label>
+                        <label for="btitle" class="col-sm-2 col-form-label">Title:</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="title" placeholder="Book Title">
+                                <input type="text" class="form-control" id="btitle" name="btitle" placeholder="Book Title">
                             </div>
                     </div>
                     <div class="form-group row p-1">
                         <label for="pages" class="col-sm-2 col-form-label">Pages:</label>
                             <div class="col-sm-10">
-                                <input type="number" class="form-control" id="pages" placeholder="Number of Pages">
+                                <input type="number" class="form-control" id="pages" name="pages" placeholder="Number of Pages">
                             </div>
                     </div>
                     <div class="form-group row p-2">
                         <div class="col-sm-10 offset-sm-2">
-                            <button type="submit" class="btn btn-primary">Add Book</button>
+                            <button type="submit" class="btn btn-success">Add Book</button>
                         </div>
                     </div>
                 </form>
@@ -48,12 +48,11 @@
                             </tr>
                     </thead>
                     <tbody>
+                        {% for b in books_all %}
                         <tr>
-                            <td>Art of Nothing</td>
+                            <td><a  class="text-white text-decoration-none" href="/book/{{b.id}}">{{b.title}}</a></td>
                         </tr>
-                        <tr>
-                            <td>Science of Knowledge</td>
-                        </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
