@@ -17,15 +17,15 @@
     <div>
         <div class="w-80 d-flex justify-content-center m-5 gap-5">
             <div class="w-30 shadow-lg bg-secondary rounded-5 p-5">
-                <h2 class="text-white">Change your Order {{order.customer}}:</h2>
-                <form class="d-flex flex-column" action="/cookie/edit">
-                    <input type="hidden" name="id">
+                <h2 class="text-white">Change your Order, {{order.customer}}:</h2>
+                <form class="d-flex flex-column" action="/cookies/update/{{order.id}}" method="POST">
+                    <input type="hidden" name="id" value="{{order.id}}">
                     <label for="customer">Customer Name:</label>
-                    <input type="text" name="customer" value="{{order.customer}}">
+                    <input type="text" name="customer" id="customer" value="{{order.customer}}">
                     <label for="type">Cookie Type:</label>
-                    <input type="text" name="type" value="{{order.type}}">
+                    <input type="text" name="type" id="type" value="{{order.type}}">
                     <label for="quantity">Number Of Boxes:</label>
-                    <input type="number" name="quantity" value="{{order.quantity}}">
+                    <input type="number" name="quantity" id="quantity" value="{{order.quantity}}">
 
                     <input class="m-5 btn btn-info" type="submit" value="Edit">
                 </form>

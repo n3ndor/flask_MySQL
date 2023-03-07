@@ -14,12 +14,11 @@ class Cookie:
     @classmethod
     def get_all(cls):
         query = "SELECT * from cookies;"
-        data = connectToMySQL(cls.DB).query_db(query)
+        results = connectToMySQL(cls.DB).query_db(query)
 
         order_list = []
-        for o in data:
+        for o in results:
             order_list.append(cls(o))
-
         return order_list
 
     @classmethod
@@ -34,19 +33,17 @@ class Cookie:
 
     @classmethod
     def get_one(cls, order_id):
-        query = "SELECT * from cookie_orders WHERE id = %(id)s;"
-        data = {
-            "id": order_id
-        }
+        query = "SELECT * FROM cookies WHERE id = %(id)s;"
+        data = {"id": order_id}
         result = connectToMySQL(cls.DB).query_db(query, data)
-        return result
+        return cls(result[0])
     
     @classmethod
     def update(cls, data):
 
         query = """
                 UPDATE cookies
-                SET (customer = %(customer)s, type = %(type)s, quantity = %(quantity)s)
+                SET customer = %(customer)s, type = %(type)s, quantity = %(quantity)s, updated_at=NOW()
                 WHERE id = %(id)s;"""
 
         result = connectToMySQL(cls.DB).query_db(query, data)
