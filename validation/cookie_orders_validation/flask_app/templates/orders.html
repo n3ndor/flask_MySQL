@@ -35,7 +35,8 @@
                             <td>{{ o.customer}}</td>
                             <td>{{ o.type}}</td>
                             <td>{{ o.quantity}}</td>
-                            <td><a class="text-white" href="/cookies/edit/{{o.id}}">Edit</a></td>
+                            <td><a class="text-white" href="/cookies/edit/{{o.id}}">Edit</a>
+                                <a class="text-white" href="/cookies/delete/{{o.id}}">Delete</a></td>
                         </tr>
                         {% endfor %}
                     </tbody>

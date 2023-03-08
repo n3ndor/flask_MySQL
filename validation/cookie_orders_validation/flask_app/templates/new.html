@@ -19,7 +19,13 @@
             <div class="w-30 shadow-lg bg-secondary rounded-5 p-5">
                 <h2 class="text-white">Add your Order:</h2>
                 <form class="d-flex flex-column" action="/cookies/create" method="POST">
-                    
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <p class="text-danger fw-bold">{{message}}</p>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
                     <label for="customer">Customer Name:</label>
                     <input type="text" id="customer" name="customer">
                     <label for="type">Cookie Type:</label>

@@ -23,10 +23,20 @@ def edit(order_id):
 
 @app.route("/cookies/create", methods=["POST"])
 def new_order():
-    Cookie.create(request.form)
-    return redirect("/cookies")
+    if Cookie.validate_order(request.form):
+        Cookie.create(request.form)
+        return redirect("/cookies")
+    return redirect("/cookies/new")
 
 @app.route("/cookies/update/<int:order_id>", methods=["Post"])
 def update_order(order_id):
-    Cookie.update(request.form)
+    if Cookie.validate_order(request.form):
+        Cookie.update(request.form)
+        return redirect("/cookies")
+    return redirect(f"/cookies/edit/{request.form['id']}")
+
+@app.route("/cookies/delete/<int:order_id>")
+def delete(order_id):
+
+    Cookie.delete(order_id)
     return redirect("/cookies")

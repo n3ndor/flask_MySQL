@@ -19,6 +19,13 @@
             <div class="w-30 shadow-lg bg-secondary rounded-5 p-5">
                 <h2 class="text-white">Change your Order, {{order.customer}}:</h2>
                 <form class="d-flex flex-column" action="/cookies/update/{{order.id}}" method="POST">
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <p class="text-danger fw-bold">{{message}}</p>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
                     <input type="hidden" name="id" value="{{order.id}}">
                     <label for="customer">Customer Name:</label>
                     <input type="text" name="customer" id="customer" value="{{order.customer}}">

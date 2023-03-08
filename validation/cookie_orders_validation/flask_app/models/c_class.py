@@ -40,11 +40,34 @@ class Cookie:
     
     @classmethod
     def update(cls, data):
-
         query = """
                 UPDATE cookies
                 SET customer = %(customer)s, type = %(type)s, quantity = %(quantity)s, updated_at=NOW()
                 WHERE id = %(id)s;"""
-
         result = connectToMySQL(cls.DB).query_db(query, data)
         return result
+    
+    @classmethod
+    def delete(cls,order_id):
+        query = """DELETE FROM cookies 
+            WHERE id = %(id)s"""
+        data = {"id":order_id}
+        return connectToMySQL(cls.DB).query_db(query, data)
+
+    @staticmethod
+    def validate_order(data):
+        is_valid = True
+
+        if len(data["customer"]) < 2:
+            flash("Name is required.")
+            is_valid = False
+        if len(data["type"]) < 2:
+            flash("Type is required.")
+            is_valid = False
+        if len(data["quantity"]) <1:
+            flash("Number is required.")
+            is_valid = False
+        elif int(data["quantity"]) <=0:
+            flash("That's not a valid number")
+            is_valid = False
+        return is_valid
