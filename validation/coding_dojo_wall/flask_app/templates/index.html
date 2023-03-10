@@ -11,18 +11,16 @@
 <body class="bg-info vh-80">
 
         <div class="w-80 d-flex justify-content-center m-5 gap-5">
-            <div class="w-35 shadow-lg bg-secondary rounded-5 p-5">
+            <div class="w-30 shadow-lg bg-secondary rounded-5 p-5">
                 <h2 class="text-dark">Register:</h2>
                 <form action="/register" method="POST">
-                    <div class="bg-danger text-warning">
                     {% with messages = get_flashed_messages(category_filter=['register']) %}
                         {% if messages %}
                             {% for message in messages %}
-                            <h5 class="p-2">{{message}}</h5>
+                            <p>{{message}}</p>
                             {% endfor %}
                         {% endif %}
                     {% endwith %}
-                    </div>
                     <div class="form-group text-white">
                         <label for="first_name">First Name:</label>
                         <input type="text" class="form-control " id="first_name" name="first_name" placeholder="Add your First Name...">
@@ -50,15 +48,14 @@
             <div class="w-30 bg-secondary shadow-lg rounded-5 p-5">
                 <h2 class="text-dark">Login in:</h2>
                 <form action="/login" method="POST">
-                    <div class="bg-danger text-warning">
                     {% with messages = get_flashed_messages(category_filter=['login']) %}
                         {% if messages %}
                             {% for message in messages %}
-                            <h5 class="p-2 ">{{message}}</h5>
+                            <p>{{message}}</p>
                             {% endfor %}
                         {% endif %}
                     {% endwith %}
-                    </div>
+
                     <div class="form-group text-white">
                         <label for="">Email:</label>
                         <input type="text" class="form-control" id="email" name="login_email" placeholder="Registered Email...">

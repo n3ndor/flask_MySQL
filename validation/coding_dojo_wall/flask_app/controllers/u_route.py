@@ -23,7 +23,6 @@ def login():
         return redirect("/")
     email_data = {"email": request.form["login_email"]}
     returning_user = u_class.User.get_by_email(email_data)
-    print(returning_user, "returning user")
     session["user_id"] = returning_user.id
     return redirect(f"/{returning_user.id}")
 
@@ -32,8 +31,8 @@ def login():
 def profile(id):
     if 'user_id' not in session:
         return redirect('/')
-    data ={ "id" : session['user_id'] }
-    a = u_class.User.get_by_id(data)
+    data ={ id : session['user_id'] }
+    a = u_class.User.get_by_email(data)
     return render_template("logged_in.html", the_user = a)
 
 @app.route('/logout')
