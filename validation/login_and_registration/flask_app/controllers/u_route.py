@@ -34,7 +34,7 @@ def profile(id):
         return redirect('/')
     data ={ "id" : session['user_id'] }
     a = u_class.User.get_by_id(data)
-    return render_template("logged_in.html", the_user = a)
+    return render_template("wall.html", the_user = a)
 
 @app.route('/logout')
 def logout():

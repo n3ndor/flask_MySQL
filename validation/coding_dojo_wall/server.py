@@ -1,6 +1,5 @@
 from flask_app import app
-from flask_app.controllers import u_route
-
+from flask_app.controllers import u_route, p_route
 
 
 

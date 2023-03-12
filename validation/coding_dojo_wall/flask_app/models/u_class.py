@@ -6,9 +6,10 @@ bcrypt = Bcrypt(app)
 import re
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$') 
+PASS_REGEX = re.compile(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$')
 
 class User:
-    db = "login_schema"
+    db = "wall"
     def __init__(self, data):
         self.id = data["id"]
         self.first_name = data['first_name']
@@ -47,20 +48,20 @@ class User:
             return None
 
     @classmethod
-    def get_by_email(cls,data):
+    def get_by_email(cls, data):
         query = "SELECT * FROM users WHERE users.email = %(email)s;"
         results = connectToMySQL(cls.db).query_db(query,data)
-        if results:
-            one_user = cls(results[0])
-            return one_user
-        else:
+        if len(results) < 1:
             return False
+        return cls(results[0])
 
-    # @classmethod
-    # def get_by_id(cls,data):
-    #     query = "SELECT * FROM users WHERE id = %(id)s;"
-    #     results = connectToMySQL(cls.db).query_db(query,data)
-    #     return cls(results[0])
+
+
+    @classmethod
+    def get_by_id(cls,data):
+        query = "SELECT * FROM users WHERE id = %(id)s;"
+        results = connectToMySQL(cls.db).query_db(query,data)
+        return cls(results[0])
 
     @staticmethod
     def validate_register(data):
@@ -68,25 +69,27 @@ class User:
         email_data = {"email" : data["email"]}
         valid_user = User.get_by_email(email_data)
 
-        if len(data['first_name']) < 3:
-            flash("First name must be at least 3 characters","register")
+        if len(data['first_name']) < 2:
+            flash("First name must be at least 2 characters","register")
             is_valid = False
-        if len(data['last_name']) < 3:
-            flash("Last name must be at least 3 characters","register")
+        if len(data['last_name']) < 2:
+            flash("Last name must be at least 2 characters","register")
             is_valid = False
-        if not EMAIL_REGEX.match(data['email']):
-            flash("Invalid Email format.","register")
+        if data['confirm'] != data['password']:
+            flash("Passwords don't match","register")
             is_valid = False
         if valid_user:
             flash("Email already taken.","register")
             is_valid = False
-        
-        
-        if len(data['password']) < 8:
-            flash("Password must be at least 8 characters","register")
+        if not EMAIL_REGEX.match(data['email']):
+            flash("Invalid Email format.","register")
             is_valid = False
-        if data['confirm'] != data['password']:
-            flash("Passwords don't match","register")
+        if not PASS_REGEX.match(data["password"]):
+            flash("Password must contain at least:","register") 
+            flash("- a digit number","register")
+            flash("- one uppercase letter","register")
+            flash("- one lowercase letter","register")
+            flash("- one digit","register")
             is_valid = False
         return is_valid
 
