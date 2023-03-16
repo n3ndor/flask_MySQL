@@ -75,6 +75,6 @@ def update_recipe(id):
 def remove_recipe(id):
     if 'user_id' not in session:
         return redirect('/')
-    r_class.Recipe.destroy({'id':id})
+    r_class.Recipe.remove({'id':id})
     return redirect('/wall')
 

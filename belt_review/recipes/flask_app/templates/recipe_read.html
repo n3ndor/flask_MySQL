@@ -11,11 +11,17 @@
 <body class="bg-info vh-80">
     <nav class="navbar sticky-top navbar-dark bg-secondary">
         <div class="d-flex w-100 justify-content-between">
-            <h2 class="text-white p-3">Coding Dojo Wall</h2>
-            <div class="d-flex w-25 justify-content-between">
-                <h2 class="pt-3 text-white">Welcome, {{ the_user.first_name}} </h2>
+            <h2 class="text-white p-3">Recipe Share</h2>
+            <div class="d-flex w-75 justify-content-end">
+                
                 <button class="shadow bg-success text-light border-0 rounded-4 m-3 p-2">
-                    <a class="text-white text-decoration-none" href="/logout">Log out</a>
+                    <a class="text-white text-decoration-none" href="/wall">Home</a>
+                </button>
+                <button class="shadow bg-success text-light border-0 rounded-4 m-3 p-2">
+                    <a class="text-white text-decoration-none" href="/wall/new_recipe">+ Create</a>
+                </button>
+                <button class="shadow bg-success text-light border-0 rounded-4 m-3 p-2">
+                    <a class="text-white text-decoration-none" href="/logout">Logout</a>
                 </button>
             </div>
         </div>
