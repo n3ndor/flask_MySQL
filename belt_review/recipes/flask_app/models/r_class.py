@@ -1,5 +1,5 @@
 from flask_app.config.mysqlconnection import connectToMySQL
-# from flask import flash
+from flask import flash
 from flask_app.models import u_class
 
 
@@ -19,7 +19,7 @@ class Recipe:
         self.creator = None
     
     @classmethod
-    def save(cls, data):
+    def save_recipe(cls, data):
         query = """ INSERT INTO recipes (user_id, name, description, instructions,date_cooked, u_30)
                 VALUES (%(user_id)s, %(name)s, %(description)s, %(instructions)s, %(date_cooked)s ,%(u_30)s);"""
         result = connectToMySQL(cls.db).query_db(query, data)
@@ -27,9 +27,23 @@ class Recipe:
     
     @classmethod
     def get_one_recipe(cls, data):
-        query = "SELECT * FROM recipes WHERE recipes.id = %(id)s;"
+        query = """ SELECT * FROM recipes 
+                JOIN users on users.id = user_id
+                WHERE recipes.id = %(id)s;"""
         result = connectToMySQL(cls.db).query_db(query, data)
-        return cls(result[0])
+        one_recipe = cls(result[0])
+        user_data = {
+                "id" : result[0]["users.id"],
+                "first_name" : result[0]['first_name'],
+                "last_name" : result[0]['last_name'],
+                "email" : result[0]['email'],
+                "password" : "",
+                "created_at" : result[0]['users.created_at'],
+                "updated_at" : result[0]['users.updated_at']
+            }
+        
+        one_recipe.creator = u_class.User(user_data)
+        return one_recipe
 
 
     @classmethod
@@ -41,7 +55,7 @@ class Recipe:
         
         all_recipes = []
         for p in results:
-            creator = cls(p)
+            one_recipe = cls(p)
             user_data = {
                 "id" : p["users.id"],
                 "first_name" : p['first_name'],
@@ -52,12 +66,12 @@ class Recipe:
                 "updated_at" : p['users.updated_at']
             }
 
-            creator.p = u_class.User(user_data)
-            all_recipes.append(creator)
+            one_recipe.creator = u_class.User(user_data)
+            all_recipes.append(one_recipe)
         return all_recipes
 
     @classmethod
-    def update(cls, data):
+    def update_recipe(cls, data):
         query = """ UPDATE recipes
                 SET name = %(name)s, description = %(description)s, instructions = %(instructions)s , date_cooked = %(date_cooked)s, u_30 = %(u_30)s
                 WHERE id = %(id)s; """
@@ -66,7 +80,7 @@ class Recipe:
 
 
     @classmethod
-    def remove(cls, data):
+    def remove_recipe(cls, data):
         query = "DELETE FROM recipes WHERE recipes.id = %(id)s "
         results = connectToMySQL(cls.db).query_db(query, data)
         return results
@@ -75,19 +89,19 @@ class Recipe:
     def validate_recipe(data):
         is_valid = True
 
-        if len(form_data['name']) < 2:
+        if len(data['name']) < 2:
             flash("Name too short.")
             is_valid = False
-        if len(form_data['description']) < 2:
+        if len(data['description']) < 2:
             flash("Description too short.")
             is_valid = False
-        if len(form_data['instructions']) < 2:
+        if len(data['instructions']) < 2:
             flash("Instructions too short.")
             is_valid = False
-        if form_data['date_cooked'] == '':
+        if data['date_cooked'] == '':
             flash("Cooked date missing.")
             is_valid = False
-        if 'u_30' not in form_data:
+        if 'u_30' not in data:
             flash("Does it take 30 mins or less?")
             is_valid = False
         return is_valid

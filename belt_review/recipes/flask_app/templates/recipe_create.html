@@ -26,8 +26,64 @@
             </div>
         </div>
     </nav>
-    <h2>Welcome on the Create Recipe</h2>
     
+    
+    <div class="w-80 d-flex justify-content-center m-5 gap-5">
+        <div class="w-50 shadow-lg bg-secondary text-white rounded-5 p-5 ">
+            <h2>Add new Recipe!</h2>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="text-danger">{{message}}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <form class="d-flex d-inline gap-5" action="/wall/create" method="POST">
+                <input type="hidden" name="user_id" value="{{the_user.id}}">
+                <div> 
+                    <div class="form-group ">
+                        <label for="name">Name:</label>
+                        <input type="text" class="form-control " id="name" name="name"
+                        value="{{ session['user_id']['name'] if 'user_id' in session else '' }}">
+                    </div>
+                    <div class="form-group ">
+                        <label for="description">Description:</label>
+                        <input type="text" class="form-control" id="description" name="description"
+                        value="{{ session['user_id']['description'] if 'user_id' in session else '' }}">
+                    </div>
+                    <div class="form-group ">
+                        <label for="instructions">instruction:</label>
+                        <input type="" class="form-control" id="instructions" name="instructions"
+                        value="{{ session['user_id']['instructions'] if 'user_id' in session else '' }}">
+                    </div>
+                </div>
+                <div class="mt-5 d-flex flex-column">
+                    <div class="form-group">
+                        <label for="date_cooked">Date Cooked/Made</label>
+                        <input type="date" class="form-control" name="date_cooked" id="date_cooked">
+                    </div>
+                    <div class="form-group">
+                        <label for="date_cooked">Under 30 minutes?</label>
+                        
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" name="u_30" id="u_30" value="1" 
+                            class="form-check-input" >
+                        <label for="u_30" class="form-label">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" name="u_30" id="un_30" value="0" 
+                            class="form-check-input">
+                        <label for="under_30" class="form-label">No</label>
+                    </div>
+                    <button class="mt-5 btn btn-success shadow-lg" type="submit">Create</button>
+                </div>
+                
+
+            </form>
+            
+        </div>
+    </div>
 
 
 

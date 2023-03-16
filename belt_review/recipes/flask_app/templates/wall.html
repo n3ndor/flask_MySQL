@@ -47,14 +47,16 @@
                         {% else %}
                         More than 30 min
                         {% endif%}</td>
-                    <td>{{ r.p.first_name }}</td>
+                    <td>{{ r.creator.first_name }}</td>
+                    {% if the_user.id == r.user_id%}
                     <td>
                         <a class="btn btn-warning p-1" href="/recipes/{{r.id}}">View</a>
-                        {% if session["user_id"] == r.p.id %}
                         <a class="btn btn-warning p-1" href="/recipes/edit/{{r.id}}">Edit</a>
                         <a class="btn btn-warning p-1" href="/recipes/remove/{{r.id}}">Delete</a>
-                        {% endif %}
                     </td>
+                    {% else %}
+                    <td><a class="btn btn-warning p-1" href="/recipes/{{r.id}}">View</a></td>
+                    {% endif %}
                 </tr>
                 {% endfor %}
             </tbody>

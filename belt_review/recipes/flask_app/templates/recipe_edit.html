@@ -26,7 +26,58 @@
             </div>
         </div>
     </nav>
-    <h2>Welcome on the Edit Recipe</h2>
+
+    <div class="w-80 d-flex justify-content-center m-5 gap-5">
+        <div class="w-50 shadow-lg bg-secondary text-white rounded-5 p-5 ">
+            <h2>Edit Your Recipe!</h2>
+            <form class="d-flex d-inline gap-5" action="/recipe/update/{{the_recipe.id}}" method="post">
+                <div> 
+                    <div class="form-group ">
+                        <label for="name">Name:</label>
+                        <input type="text" class="form-control " id="name" name="name"
+                        value="{{ session['user_id']['name'] if 'user_id' in session else '' }}">
+                    </div>
+                    <div class="form-group ">
+                        <label for="description">Description:</label>
+                        <input type="text" class="form-control" id="description" name="description"
+                        value="{{ session['user_id']['description'] if 'user_id' in session else '' }}">
+                    </div>
+                    <div class="form-group ">
+                        <label for="instruction">instruction:</label>
+                        <input type="" class="form-control" id="instruction" name="instruction"
+                        value="{{ session['user_id']['instruction'] if 'user_id' in session else '' }}">
+                    </div>
+                </div>
+                <div class="mt-5 d-flex flex-column">
+                    <div class="form-group">
+                        <label for="date_cooked">Date Cooked/Made</label>
+                        <input type="date" class="form-control" name="date_cooked" id="date_cooked">
+                    </div>
+                    <div class="form-group">
+                        <label for="date_cooked">Under 30 minutes?</label>
+                        
+                    </div>
+                    <div class="form-check-inline">
+                        <input type="radio" name="under_30" id="under_30" value="1" 
+                            class="form-check-input" {% if the_recipe.u_30 == 1 %}checked{% endif %}>
+                        <label for="under_30" class="form-label">Yes</label>
+                    </div>
+                    <div class="form-check-inline">
+                        <input type="radio" name="under_30" id="under_30" value="0" 
+                            class="form-check-input" {% if the_recipe.u_30 == 0 %}checked{% endif %}>
+                        <label for="under_30" class="form-label">No</label>
+                    </div>
+                    <button class="mt-5 btn btn-success shadow-lg" type="submit">Update</button>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+
+
+
+    
     
 
 
