@@ -39,7 +39,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for r in the_recipes %}
+                {% for r in the_recipes | sort(attribute="created_at", reverse = True): %}
                 <tr>
                     <td>{{r.name}}</td>
                     <td>{% if r.u_30 == 1 %}

@@ -45,18 +45,15 @@
                 <div> 
                     <div class="form-group ">
                         <label for="name">Name:</label>
-                        <input type="text" class="form-control " id="name" name="name"
-                        value="{{ session['user_id']['name'] if 'user_id' in session else '' }}">
+                        <input type="text" class="form-control " id="name" name="name">
                     </div>
                     <div class="form-group ">
                         <label for="description">Description:</label>
-                        <input type="text" class="form-control" id="description" name="description"
-                        value="{{ session['user_id']['description'] if 'user_id' in session else '' }}">
+                        <textarea class="form-control" id="description" name="description"></textarea>
                     </div>
                     <div class="form-group ">
-                        <label for="instructions">instruction:</label>
-                        <input type="" class="form-control" id="instructions" name="instructions"
-                        value="{{ session['user_id']['instructions'] if 'user_id' in session else '' }}">
+                        <label for="instructions">Instructions:</label>
+                        <textarea class="form-control" rows="5" id="instructions" name="instructions"></textarea>
                     </div>
                 </div>
                 <div class="mt-5 d-flex flex-column">
