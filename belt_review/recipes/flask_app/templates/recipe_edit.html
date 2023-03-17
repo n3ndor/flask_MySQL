@@ -60,22 +60,24 @@
                         <label for="date_cooked">Date Cooked/Made</label>
                         <input type="date" class="form-control" name="date_cooked" id="date_cooked" value="{{the_recipe.date_cooked}}">
                     </div>
-                    <div class="form-group mt-3">
+                    <div class="form-group my-3">
                         <label for="u_30">Under 30 minutes?</label>
                         
                     </div>
-                    <div class="form-check-inline">
-                        <input type="radio" name="u_30" id="u_30" value="yes" 
-                            class="form-check-input" {% if the_recipe.u_30 != "no" %}checked{% endif %}>
-                        <label for="under_30" class="form-label">Yes</label>
-                    </div>
-                    <div class="form-check-inline">
-                        <input type="radio" name="u_30" id="u30" value="no" 
-                            class="form-check-input" {% if the_recipe.u_30 != "yes" %}checked{% endif %}>
-                        <label for="under_30" class="form-label">No</label>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label for="u_30" class="btn btn-dark active">
+                        {% if the_recipe.u_30 == 1 %}    
+                        <input type="radio" name="u_30" id="u_30" value="1" class="form-check-input mx-3" checked>Yes
+                        <input type="radio" name="u_30" id="u30" value="0" class="form-check-input mx-3" >No
+                        {% else %}
+                        <input type="radio" name="u_30" id="u_30" value="1" class="form-check-input mx-3" >Yes
+                        <input type="radio" name="u_30" id="u30" value="0" class="form-check-input mx-3" checked>No
+                        {% endif %}
+                        </label>
+                    
+                        
                     </div>
 
-                    
                     
                     <button class="mt-5 btn btn-success shadow-lg" type="submit">Update</button>
                 </div>
