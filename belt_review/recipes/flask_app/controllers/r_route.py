@@ -59,7 +59,7 @@ def edit_recipe(id):
 def update_recipe(id):
     if 'user_id' not in session:
         return redirect('/')
-    if not Recipe.validate_recipe(request.form):
+    if not r_class.Recipe.validate_recipe(request.form):
         return redirect(f'/recipes/edit/{id}')
 
     recipe_data = {

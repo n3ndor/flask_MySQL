@@ -38,8 +38,10 @@
                     {% endfor %}
                 {% endif %}
             {% endwith %}
+
+            
             <form class="d-flex d-inline gap-5" action="/wall/create" method="POST">
-                <input type="hidden" name="user_id" value="{{the_user.id}}">
+                <input type="hidden" name="user_id" value="{{ session['form_data']['name'] if 'form_data' in 	session else '' }}">
                 <div> 
                     <div class="form-group ">
                         <label for="name">Name:</label>

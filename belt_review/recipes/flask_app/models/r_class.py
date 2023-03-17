@@ -95,7 +95,7 @@ class Recipe:
         if len(data['description']) < 2:
             flash("Description too short.")
             is_valid = False
-        if len(data['instructions']) < 2:
+        if len(data["instructions"]) < 2:
             flash("Instructions too short.")
             is_valid = False
         if data['date_cooked'] == '':

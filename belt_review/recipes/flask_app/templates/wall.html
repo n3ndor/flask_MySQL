@@ -43,9 +43,9 @@
                 <tr>
                     <td>{{r.name}}</td>
                     <td>{% if r.u_30 == 1 %}
-                        Yes, doable
+                        Yes, doable in 30 min
                         {% else %}
-                        More than 30 min
+                        No, more than 30 min
                         {% endif%}</td>
                     <td>{{ r.creator.first_name }}</td>
                     {% if the_user.id == r.user_id%}
