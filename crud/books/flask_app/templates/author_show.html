@@ -17,7 +17,7 @@
     <div>
         <div class="w-80 d-flex justify-content-center m-5 gap-5">
             <div class="w-30 shadow-lg bg-secondary rounded-5 p-5">
-                <h2 class="text-light p-5"> {'{Author}} favorites</h2>
+                <h2 class="text-light p-5"> {{author.name}}'s favorites</h2>
                 <table class="table table-bordered">
                     <thead class="thead-light">
                         <tr>
@@ -26,33 +26,35 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {% for b in author.favorite_books %}
                         <tr>
-                            <td>Art of Something</td>
-                            <td>Otto</td>
+                            <td>{{ book.title }}</td>
+                            <td>{{ book.num_of_pages}} </td>
                         </tr>
-                        <tr>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                        </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
 
             <div class="w-30 bg-secondary shadow-lg rounded-5 p-5">
                 <h2 class="text-light">Add Author's Favorite</h2>
-                <p>Book:</p>
-                <p>dropdown</p>
-                <p>submit</p>
+                <div class="form-group">
+                    <label for="book_id">Book:</label>
+                    <select name="book_id" class="form-control" >
+                        {% for book in unfavorited_books %}
+                            <option value="{{book.id}}">{{book.title}}</option>
+                        {% endfor %}
+                    </select>
+                    <input type="submit" value="Add Book" class="btn btn-primary">
+                </div>
 
-            
+                
             </div>
-            
-        </div>
-        <div class="d-flex justify-content-center">
-            <a href="/" class="btn btn-success" role="button">Go Back</a>
         </div>
     </div>
-
+    <div class="d-flex justify-content-center">
+        <a href="/" class="btn btn-success" role="button">Go Back</a>
+    </div>
 
 
 

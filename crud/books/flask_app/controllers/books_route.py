@@ -9,7 +9,8 @@ def books():
 
 @app.route("/add/book", methods=["POST"])
 def new_book():
-    data = {"title":request.form["btitle"],"num_of_pages":request.form["pages"]}
+    data = {"title":request.form["b_title"],
+    "num_of_pages":request.form["pages"]}
     book_id = Book.save_book(data)
     return redirect("/books")
 
@@ -18,11 +19,22 @@ def update_book():
     Book.update_books(request.form)
     return redirect("/books")
 
-@app.route("/book")
+@app.route("/book/<int:id>")
 def book():
-    return render_template("book_show.html")
+    data = {"id" : id}
+    return render_template("book_show.html", book=Book.get_by_id(data), unfavorited_authors=Author.unfavorited_authors(data))
 
 @app.route("/book/<int:book_id>")
 def show_book(book_id):
-    one_book = Book.get_book(book_id)
-    return render_template("book_show.html", book_one = one_book)
+    data = {"id" : id}
+    get_books = Book.get_books(book_id)
+    return render_template("book_show.html", book = get_books, unfavorited_authors = Author.unfavorited_authors(data))
+
+@app.route("/join/author", methods=["POST"])
+def join_author():
+    data = {
+        "author_id" : request.form["author_id"],
+        "book_id" : request.form["book_id"]
+    }
+    Author.add_favorite(data)
+    return redirect(f"/book/{request.form['book_id']}")

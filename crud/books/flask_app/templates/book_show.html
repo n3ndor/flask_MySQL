@@ -16,34 +16,28 @@
     <div>
         <div class="w-80 d-flex justify-content-center m-5 gap-5">
             <div class="w-30 shadow-lg bg-secondary rounded-5 p-5">
-                <h2 class="text-light p-5">Title:  {'{Book}}</h2>
-                <table class="table">
-                    <thead class="thead-light">
-                        <tr>
-                        <th>Favorited by:</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Arthur Schmidt</td>
-                        </tr>
-                        <tr>
-                            <td>Isabelle Belle </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <h2 class="text-light p-5">Title:  {{book.title}}</h2>
+                <h3>Favorited by:</h3>
+                {% for a in book.authors_who_favorited %}
+                <p>{{author.name}}</p>
+                {% endfor%}
+                
             </div>
 
             <div class="w-30 bg-secondary shadow-lg rounded-5 p-5">
-                <h2 class="text-light">Add Book's Favorited</h2>
-                <p>Author:</p>
-                <p>dropdown</p>
-                <p>submit</p>
-
-            
+                <form action="/join/author" method="POST">
+                    <input type="hidden" name="book_id" value="{{book.id}}">
+                    <label for="author_id">Book:</label>
+                    <select name="author_id" id="author_id">
+                        {% for aa in unfavorited_authors %}
+                        <option value="{{author_id}}">{{aa.name}}</option>
+                        {% endfor %}
+                    </select>
+                    <input type="submit" value="Add Book">
+                </form>
             </div>
-            
         </div>
+
         <div class="d-flex justify-content-center">
             <a href="/" class="btn btn-success" role="button">Go Back</a>
         </div>
