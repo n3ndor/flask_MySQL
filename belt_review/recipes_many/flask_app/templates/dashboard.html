@@ -13,7 +13,7 @@
         <div class="d-flex w-100 justify-content-between">
             <h2 class="text-white p-3">Recipe Share</h2>
             <div class="d-flex w-75 justify-content-end">
-                <h2 class="pt-3 text-white">Welcome, {{ the_user.first_name}} </h2>
+                <h2 class="pt-3 text-white">Welcome,  </h2>
                 <button class="shadow bg-success text-light border-0 rounded-4 m-3 p-2">
                     <a class="text-white text-decoration-none" href="/dashboard">Home</a>
                 </button>
@@ -39,11 +39,11 @@
                 </tr>
             </thead>
             <tbody>
-                {% for r in the_recipes | sort(attribute="created_at", reverse = True): %}
+                {% for r in all_recipes | sort(attribute="created_at", reverse = True): %}
                 <tr>
                     <td>{{r.name}}</td>
                     <td>{{ r.creator.first_name }}</td>
-                    {% if the_user.id == r.user_id%}
+                    {% if all_recipes.id == r.user_id %}
                     <td>
                         <a class="btn btn-warning p-1" href="/recipes/{{r.id}}">View</a>
                         <a class="btn btn-warning p-1" href="/recipes/edit/{{r.id}}">Edit</a>
@@ -53,10 +53,10 @@
                     <td><a class="btn btn-warning p-1" href="/recipes/{{r.id}}">View</a></td>
                     {% endif %}
                     <td>
-                        {% if session['user_id'] not in r.liked_by %}
-                            <a class="btn btn-primary p-1" href="/recipes/like/{{r.id}}">Like 👍</a>
+                        {% if r.liked_by != [] %}
+                        <a class="btn btn-secondary p-1" href="/recipes/unlike/{{r.id}}">Unlike 👎</a>
                         {%else%}
-                            <a class="btn btn-secondary p-1" href="/recipes/unlike/{{r.id}}">Unlike 👎</a>
+                        <a class="btn btn-primary p-1" href="/recipes/like/{{r.id}}">Like 👍</a>
                         {% endif %}
                     </td>
                 </tr>

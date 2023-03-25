@@ -13,7 +13,7 @@
         <div class="d-flex w-100 justify-content-between">
             <h2 class="text-white p-3">Recipe Share</h2>
             <div class="d-flex w-75 justify-content-end">
-                <h2 class="pt-3 text-white">Welcome, {{ the_recipe.first_name }} </h2>
+                <h2 class="pt-3 text-white">Welcome,  </h2>
                 <button class="shadow bg-success text-light border-1 rounded-4 m-3 p-2">
                     <a class="text-white text-decoration-none" href="/dashboard">Home</a>
                 </button>
@@ -31,8 +31,11 @@
         <div class="w-50 shadow-lg bg-secondary text-white rounded-5 p-5 ">
             <div class="row justify-content-between mt-5">
                 <h2 class='fs-1 col-6'>{{the_recipe.name}}</h2>
-                <p class="fs-3 col-6 text-end">Posted by: {{the_recipe.first_name}}</p>
+                <p class="fs-3 col-6 text-end">Posted by: {{the_recipe.creator.first_name}}</p>
                 <p class="text-end">Liked: {{the_recipe.liked_by|length}}</p>
+                {% for user in the_recipe.liked_by %}
+                <p>{{user.first_name}}</p>
+                {% endfor %}
             </div>
     
             <div class="row border border-dark border-4 rounded rounded-3 p-3 fs-4">

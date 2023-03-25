@@ -6,14 +6,8 @@ from flask_app.models import user_model, recipe_model
 def index_dashboard():
     if 'user_id' not in session:
         return redirect('/user/login')
-    user_data = {"id":session['user_id']}
-    user_the = user_model.User.get_by_id(user_data)
-    recipe_the = recipe_model.Recipe.get_all_recipes()
-
-    likes_the = recipe_model.Recipe.get_one_recipe_user_likes()
-
-    return render_template('dashboard.html', the_user = user_the, the_recipes = likes_the) #, the_likes=likes_the
-
+    all_recipes = recipe_model.Recipe.get_all_recipes({"id" : session["user_id"]})
+    return render_template('dashboard.html', all_recipes = all_recipes)
 
 @app.route("/dashboard/new_recipe")
 def new_recipe():
@@ -30,7 +24,6 @@ def create_recipe():
     if not recipe_model.Recipe.validate_recipe(request.form):
         return redirect("/dashboard/new_recipe")
     new_recipe = recipe_model.Recipe.save_recipe(request.form)
-
     return redirect(f"/dashboard")
 
 @app.route('/recipes/<int:id>')
@@ -38,15 +31,16 @@ def read_recipe(id):
     if 'user_id' not in session:
         return redirect('/')
     recipe_one = recipe_model.Recipe.get_one_recipe({'id': id})
-    # recipe_one = recipe_model.Recipe.get_one_recipe_user_likes()
+    # like_the = recipe_model.Recipe.get_one_recipe_user_likes()
 
-    return render_template('recipe_read.html', the_recipe = recipe_one)
+    return render_template('recipe_read.html', the_recipe = recipe_one) #, the_like = like_the
 
 @app.route('/recipes/edit/<int:id>')
 def edit_recipe(id):
     if 'user_id' not in session:
         return redirect('/')
     recipe_one = recipe_model.Recipe.get_one_recipe({'id': id})
+
     return render_template('recipe_edit.html', the_recipe= recipe_one)
 
 @app.route('/recipes/update/<int:id>', methods=['POST'])
@@ -80,7 +74,7 @@ def like_recipes(id):
         return redirect('/')
     like_data={
         "user_id": session['user_id'],
-        "recipes_id":  id,
+        "recipe_id":  id,
     }
     recipe_model.Recipe.like_recipes(like_data)
     return redirect("/dashboard")
@@ -92,7 +86,7 @@ def unlike_recipes(id):
         return redirect('/')
     like_data={
         "user_id": session['user_id'],
-        "recipes_id":  id,
+        "recipe_id":  id,
     }
     recipe_model.Recipe.unlike_recipes(like_data)
     return redirect("/dashboard")
