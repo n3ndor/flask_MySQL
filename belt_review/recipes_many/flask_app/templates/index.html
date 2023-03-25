@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" 
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <title>Recipe Share</title>
+</head>
+<body class="bg-info vh-80 ">
+    <nav class="navbar sticky-top navbar-dark bg-secondary">
+        <h2 class="text-white p-3">Recipe Share</h2>
+    </nav>
+    
+        <div class="w-80 d-flex justify-content-center m-5 gap-5">
+            <div class="w-35 shadow-lg bg-secondary rounded-5 p-5">
+                <h2 class="text-white">Register:</h2>
+                <form action="/register" method="POST" class="text-white">
+                    <div class="bg-danger text-warning">
+                    {% with messages = get_flashed_messages(category_filter=['register']) %}
+                        {% if messages %}
+                            {% for message in messages %}
+                            <h5 class="p-2">{{message}}</h5>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                    </div>
+                    <div class="form-group ">
+                        <label for="first_name">First Name:</label>
+                        <input type="text" class="form-control " id="first_name" name="first_name" placeholder="Add your First Name..."
+                        value="{{ session['user_id']['first_name'] if 'user_id' in session else '' }}">
+                    </div>
+                    <div class="form-group ">
+                        <label for="last_name">Last Name:</label>
+                        <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Add your Last Name..."
+                        value="{{ session['user_id']['last_name'] if 'user_id' in session else '' }}">
+                    </div>
+                    <div class="form-group ">
+                        <label for="email">Email:</label>
+                        <input type="text" class="form-control" id="email" name="email" placeholder="Add your Email..."
+                        value="{{ session['user_id']['email'] if 'user_id' in session else '' }}">
+                    </div>
+                    <div class="form-group ">
+                        <label for="password">Password:</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="********">
+                    </div>
+                    <div class="form-group ">
+                        <label for="confirm">Confirm Password:</label>
+                        <input type="password" class="form-control" id="confirm" name="confirm" placeholder="********">
+                    </div>
+                    <button class="shadow bg-danger text-light border-0 rounded-4 mt-3 p-2" type="submit">Register</button>
+                </form>
+            </div>
+
+            <div class="w-30 bg-secondary shadow-lg rounded-5 p-5">
+                <h2 class="text-white">Login in:</h2>
+                <form action="/login" method="POST">
+                    <div class="bg-danger text-warning">
+                    {% with messages = get_flashed_messages(category_filter=['login']) %}
+                        {% if messages %}
+                            {% for message in messages %}
+                            <h5 class="p-2 ">{{message}}</h5>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                    </div>
+                    <div class="form-group text-white">
+                        <label for="">Email:</label>
+                        <input type="text" class="form-control" id="email" name="login_email" placeholder="Registered Email..."
+                        value="{{ session['user_id']['login_email'] if 'user_id' in session else '' }}">
+                    </div>
+                    <div class="form-group text-white">
+                        <label for="">Password:</label>
+                        <input type="password" class="form-control" id="password" name="login_password" placeholder="********">
+                    </div>
+                    <button class="shadow bg-success text-light border-0 rounded-4 mt-3 p-2" type="submit">Login</button>
+                </form>
+
+            </div>
+        </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+</body>
+</html>

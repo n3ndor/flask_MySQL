@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" 
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <title>Dashboard</title>
+</head>
+<body class="bg-info vh-80">
+    <nav class="navbar sticky-top navbar-dark bg-secondary">
+        <div class="d-flex w-100 justify-content-between">
+            <h2 class="text-white p-3">Recipe Share</h2>
+            <div class="d-flex w-75 justify-content-end">
+                <h2 class="pt-3 text-white">Welcome, {{ the_user.first_name}} </h2>
+                <button class="shadow bg-success text-light border-0 rounded-4 m-3 p-2">
+                    <a class="text-white text-decoration-none" href="/dashboard">Home</a>
+                </button>
+                <button class="shadow bg-success text-light border-0 rounded-4 m-3 p-2">
+                    <a class="text-white text-decoration-none" href="/dashboard/new_recipe">+ Create</a>
+                </button>
+                <button class="shadow bg-success text-light border-0 rounded-4 m-3 p-2">
+                    <a class="text-white text-decoration-none" href="/logout">Logout</a>
+                </button>
+            </div>
+        </div>
+    </nav>
+    <div class="m-5">
+        <h2 class="m-5">All posted Recipes:</h2>
+
+        <table class="table table-striped ">
+            <thead class="table-danger">
+                <tr>
+                    <th>Name</th>
+                    <th>Posted By</th>
+                    <th>Actions</th>
+                    <th>Likes</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in the_recipes | sort(attribute="created_at", reverse = True): %}
+                <tr>
+                    <td>{{r.name}}</td>
+                    <td>{{ r.creator.first_name }}</td>
+                    {% if the_user.id == r.user_id%}
+                    <td>
+                        <a class="btn btn-warning p-1" href="/recipes/{{r.id}}">View</a>
+                        <a class="btn btn-warning p-1" href="/recipes/edit/{{r.id}}">Edit</a>
+                        <a class="btn btn-warning p-1" href="/recipes/remove/{{r.id}}">Delete</a>
+                    </td>
+                    {% else %}
+                    <td><a class="btn btn-warning p-1" href="/recipes/{{r.id}}">View</a></td>
+                    {% endif %}
+                    <td>
+                        {% if session['user_id'] not in r.liked_by %}
+                            <a class="btn btn-primary p-1" href="/recipes/like/{{r.id}}">Like 👍</a>
+                        {%else%}
+                            <a class="btn btn-secondary p-1" href="/recipes/unlike/{{r.id}}">Unlike 👎</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+</body>
+</html>

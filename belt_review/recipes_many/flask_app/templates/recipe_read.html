@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" 
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <title>Read Recipe</title>
+</head>
+<body class="bg-info vh-80">
+    <nav class="navbar sticky-top navbar-dark bg-secondary">
+        <div class="d-flex w-100 justify-content-between">
+            <h2 class="text-white p-3">Recipe Share</h2>
+            <div class="d-flex w-75 justify-content-end">
+                <h2 class="pt-3 text-white">Welcome, {{ the_recipe.first_name }} </h2>
+                <button class="shadow bg-success text-light border-1 rounded-4 m-3 p-2">
+                    <a class="text-white text-decoration-none" href="/dashboard">Home</a>
+                </button>
+                <button class="shadow bg-success text-light border-1 rounded-4 m-3 p-2">
+                    <a class="text-white text-decoration-none" href="/dashboard/new_recipe">+ Create</a>
+                </button>
+                <button class="shadow bg-success text-light border-1 rounded-4 m-3 p-2">
+                    <a class="text-white text-decoration-none" href="/logout">Logout</a>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="w-80 d-flex justify-content-center m-5 gap-5">
+        <div class="w-50 shadow-lg bg-secondary text-white rounded-5 p-5 ">
+            <div class="row justify-content-between mt-5">
+                <h2 class='fs-1 col-6'>{{the_recipe.name}}</h2>
+                <p class="fs-3 col-6 text-end">Posted by: {{the_recipe.first_name}}</p>
+                <p class="text-end">Liked: {{the_recipe.liked_by|length}}</p>
+            </div>
+    
+            <div class="row border border-dark border-4 rounded rounded-3 p-3 fs-4">
+                <div class="row mb-3">
+                    <p class="col-4">Description:</p>
+                    <p class="col-8">{{the_recipe.description}}</p>
+                </div>
+                <div class="row mb-3">
+                    <p class="col-4">Instructions:</p>
+                    <p class="col-8">{{the_recipe.instructions}}</p>
+                </div>
+                <div class="row mb-3">
+                    <p class="col-4">Date Made:</p>
+                    <p class="col-8">{{the_recipe.date_cooked.strftime('%d %B %Y')}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+</body>
+</html>
