@@ -7,7 +7,8 @@ def index_dashboard():
     if 'user_id' not in session:
         return redirect('/user/login')
     all_recipes = recipe_model.Recipe.get_all_recipes({"id" : session["user_id"]})
-    return render_template('dashboard.html', all_recipes = all_recipes)
+    user = user_model.User.get_by_id({"id" : session["user_id"]})
+    return render_template('dashboard.html', all_recipes = all_recipes, user = user)
 
 @app.route("/dashboard/new_recipe")
 def new_recipe():
@@ -31,9 +32,8 @@ def read_recipe(id):
     if 'user_id' not in session:
         return redirect('/')
     recipe_one = recipe_model.Recipe.get_one_recipe({'id': id})
-    # like_the = recipe_model.Recipe.get_one_recipe_user_likes()
-
-    return render_template('recipe_read.html', the_recipe = recipe_one) #, the_like = like_the
+    user = user_model.User.get_by_id({"id" : session["user_id"]})
+    return render_template('recipe_read.html', the_recipe = recipe_one,  user = user) 
 
 @app.route('/recipes/edit/<int:id>')
 def edit_recipe(id):
